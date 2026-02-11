@@ -1349,13 +1349,13 @@
             <span class="music-icon" id="musicIcon">🎵</span>
         </button>
         <audio id="backgroundAudio" loop>
-            <source src="musicc.mpeg" type="audio/mpeg">
+            <source src="OPP.mpeg" type="audio/mpeg">
         </audio>
     </div>
     
     <!-- Celebration Audio -->
     <audio id="celebrationAudio">
-        <source src="musicc.mpeg" type="audio/mpeg">
+        <source src="OPPP.mpeg" type="audio/mpeg">
     </audio>
 
     <!-- Celebration -->
@@ -1793,31 +1793,8 @@
                 console.log('loveStory not found');
             }
             
-            // Play celebration music (pauses background, plays celebration)
-            const backgroundAudio = document.getElementById('backgroundAudio');
-            const celebrationAudio = document.getElementById('celebrationAudio');
-            
-            // Pause background music but remember position
-            if (backgroundAudio) {
-                backgroundAudio.pause();
-                // Don't reset currentTime - we'll resume from where we left off
-            }
-            
-            // Play celebration music
-            if (celebrationAudio) {
-                celebrationAudio.currentTime = 0;  // Start celebration from beginning
-                celebrationAudio.volume = 0.8;
-                celebrationAudio.play().catch(function(e) {
-                    console.log('Celebration music play failed:', e);
-                });
-            }
-            
-            // Update music button to show paused state
-            const musicIcon = document.getElementById('musicIcon');
-            const musicBtn = document.getElementById('musicBtn');
-            if (musicIcon) musicIcon.textContent = '🎵';
-            if (musicBtn) musicBtn.classList.remove('playing');
-            isMusicPlaying = false;
+            // DO NOT play celebration music when saying Yes - only show sections
+            // Celebration music will play when Touch My Heart is clicked
             
             const finalCelebration = document.getElementById('finalCelebration');
             const colors = ['#ff6b6b', '#feca57', '#ff9ff3', '#54a0ff', '#e91e63'];

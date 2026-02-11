@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 Happy Propose Day 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Celebration Animation */
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatHeart 4s ease-out forwards;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Header */
+        .header {
+            padding: 40px 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #e91e63;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Love Meter */
+        .love-meter {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .love-meter h2 {
+            color: #e91e63;
+            margin-bottom: 15px;
+        }
+
+        .meter-bar {
+            background: #f0f0f0;
+            border-radius: 25px;
+            height: 30px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .meter-fill {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24);
+            height: 100%;
+            width: 0%;
+            transition: width 2s ease-out;
+            border-radius: 25px;
+        }
+
+        /* Envelope Section */
+        .envelope-section {
+            padding: 40px 20px;
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        .envelope-section h2 {
+            color: #e91e63;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .envelopes-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .envelope {
+            width: 120px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .envelope:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .envelope::before {
+            content: '💌';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+        }
+
+        .envelope.opened {
+            animation: openEnvelope 0.5s ease-out forwards;
+        }
+
+        @keyframes openEnvelope {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        .envelope-counter {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e91e63;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        /* Letter Modal */
+        .letter-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .letter-content {
+            background: linear-gradient(135deg, #fff5f5, #fff);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: letterAppear 0.5s ease-out;
+            position: relative;
+        }
+
+        @keyframes letterAppear {
+            from {
+                transform: scale(0) rotate(-10deg);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .letter-content h3 {
+            color: #e91e63;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .letter-content p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .close-letter {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 25px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .close-letter:hover {
+            transform: scale(1.05);
+        }
+
+        /* Proposal Section */
+        .proposal-section {
+            display: none;
+            padding: 60px 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .proposal-question {
+            font-size: 2.5rem;
+            color: #e91e63;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .proposal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .proposal-btn {
+            padding: 15px 50px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Georgia', serif;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            box-shadow: 0 5px 20px rgba(238, 90, 36, 0.4);
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.5);
+        }
+
+        .no-btn {
+            background: white;
+            color: #e91e63;
+            border: 2px solid #e91e63;
+            position: relative;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            display: none;
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.5);
+            margin: 40px 0;
+            border-radius: 20px;
+            animation: fadeInUp 1s ease-out 1.5s both;
+        }
+
+        .gallery-section h2 {
+            color: #e91e63;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #adb5bd;
+            font-size: 3rem;
+            flex-direction: column;
+        }
+
+        .gallery-placeholder p {
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Romantic Lines */
+        .romantic-lines {
+            display: none;
+            padding: 40px 20px;
+            animation: fadeInUp 1s ease-out 2s both;
+        }
+
+        .romantic-lines h2 {
+            color: #e91e63;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        .lines-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .romantic-line {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-style: italic;
+            color: #555;
+            font-size: 1rem;
+            max-width: 300px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .romantic-line:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Getting Ready Section */
+        .getting-ready {
+            display: none;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #ffeef8, #fff0f5);
+            margin: 40px 0;
+            border-radius: 20px;
+            animation: fadeInUp 1s ease-out 2.5s both;
+        }
+
+        .getting-ready h2 {
+            color: #e91e63;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .countdown-item .number {
+            font-size: 2.5rem;
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        .countdown-item .label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Love Story Animation */
+        .love-story {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .characters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 0 50px;
+            position: relative;
+        }
+
+        .boy, .girl {
+            font-size: 8rem;
+            animation: none;
+        }
+
+        .boy {
+            animation: boyWalkRight 2s ease-in-out forwards;
+        }
+
+        .girl {
+            animation: girlWalkLeft 2s ease-in-out forwards;
+        }
+
+        @keyframes boyWalkRight {
+            from {
+                transform: translateX(-200px);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes girlWalkLeft {
+            from {
+                transform: translateX(200px);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .hug {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10rem;
+            opacity: 0;
+            animation: hugAppear 1s ease-out 2s forwards;
+        }
+
+        @keyframes hugAppear {
+            0% { opacity: 0; transform: translateX(-50%) scale(0); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.2); }
+            100% { opacity: 1; transform: translateX(-50%) scale(1); }
+        }
+
+        .love-text {
+            font-size: 3rem;
+            color: #e91e63;
+            margin-top: 30px;
+            opacity: 0;
+            animation: loveTextAppear 1s ease-out 3s forwards;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        @keyframes loveTextAppear {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .celebration-final {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .final-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: finalHeartFloat 3s ease-out forwards;
+        }
+
+        @keyframes finalHeartFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Phone Disappear */
+        .phone-disappear {
+            animation: phoneFade 2s ease-in-out 5s forwards;
+        }
+
+        @keyframes phoneFade {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        @media (max-width: 900px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .envelopes-container {
+                gap: 20px;
+            }
+            
+            .envelope {
+                width: 90px;
+                height: 60px;
+            }
+            
+            .proposal-question {
+                font-size: 1.8rem;
+            }
+            
+            .boy, .girl {
+                font-size: 5rem;
+            }
+            
+            .love-text {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+                padding: 0 10px;
+            }
+            
+            .header p {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+            
+            .love-meter {
+                padding: 20px 15px;
+                margin: 15px;
+                max-width: none;
+            }
+            
+            .love-meter h2 {
+                font-size: 1.3rem;
+            }
+            
+            .envelope-section {
+                padding: 30px 15px;
+            }
+            
+            .envelope-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .envelopes-container {
+                gap: 15px;
+                padding: 0 10px;
+            }
+            
+            .envelope {
+                width: 80px;
+                height: 55px;
+                animation: float 2s ease-in-out infinite;
+            }
+            
+            .envelope::before {
+                font-size: 1.5rem;
+            }
+            
+            .envelope-counter {
+                bottom: -20px;
+                font-size: 0.75rem;
+                padding: 3px 10px;
+            }
+            
+            .proposal-section {
+                padding: 40px 15px;
+            }
+            
+            .proposal-question {
+                font-size: 1.5rem;
+                padding: 0 10px;
+                margin-bottom: 30px;
+            }
+            
+            .proposal-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .proposal-btn {
+                padding: 12px 40px;
+                font-size: 1.1rem;
+                width: 80%;
+                max-width: 200px;
+            }
+            
+            .letter-content {
+                padding: 25px 20px;
+                width: 95%;
+                margin: 10px;
+            }
+            
+            .letter-content h3 {
+                font-size: 1.2rem;
+            }
+            
+            .letter-content p {
+                font-size: 0.95rem;
+            }
+            
+            .gallery-section {
+                padding: 30px 15px;
+                margin: 30px 10px;
+            }
+            
+            .gallery-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 0 10px;
+            }
+            
+            .romantic-lines {
+                padding: 30px 15px;
+            }
+            
+            .romantic-lines h2 {
+                font-size: 1.4rem;
+            }
+            
+            .lines-container {
+                gap: 15px;
+                padding: 0 10px;
+            }
+            
+            .romantic-line {
+                padding: 15px 20px;
+                font-size: 0.9rem;
+                max-width: none;
+            }
+            
+            .getting-ready {
+                padding: 30px 15px;
+                margin: 30px 10px;
+            }
+            
+            .getting-ready h2 {
+                font-size: 1.4rem;
+            }
+            
+            .countdown {
+                gap: 10px;
+            }
+            
+            .countdown-item {
+                padding: 15px 10px;
+                min-width: 70px;
+            }
+            
+            .countdown-item .number {
+                font-size: 1.8rem;
+            }
+            
+            .countdown-item .label {
+                font-size: 0.75rem;
+            }
+            
+            .boy, .girl {
+                font-size: 4rem;
+            }
+            
+            .hug {
+                font-size: 6rem;
+            }
+            
+            .love-text {
+                font-size: 1.5rem;
+                padding: 0 20px;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px 10px;
+            }
+            
+            .header {
+                padding: 25px 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+            
+            .envelope {
+                width: 70px;
+                height: 48px;
+            }
+            
+            .envelope::before {
+                font-size: 1.2rem;
+            }
+            
+            .proposal-question {
+                font-size: 1.3rem;
+            }
+            
+            .proposal-btn {
+                padding: 10px 30px;
+                font-size: 1rem;
+            }
+            
+            .letter-content {
+                padding: 20px 15px;
+            }
+            
+            .letter-content h3 {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+            
+            .letter-content p {
+                font-size: 0.85rem;
+                line-height: 1.6;
+            }
+            
+            .close-letter {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .gallery-item {
+                aspect-ratio: 1;
+            }
+            
+            .romantic-line {
+                padding: 12px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .countdown-item {
+                padding: 10px 8px;
+                min-width: 60px;
+            }
+            
+            .countdown-item .number {
+                font-size: 1.5rem;
+            }
+        
+        @media (max-width: 360px) {
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .envelope {
+                width: 60px;
+                height: 42px;
+            }
+            
+            .envelope::before {
+                font-size: 1rem;
+            }
+            
+            .proposal-question {
+                font-size: 1.1rem;
+            }
+            
+            .countdown-item {
+                padding: 8px 5px;
+                min-width: 50px;
+            }
+            
+            .countdown-item .number {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .envelope:hover {
+                transform: scale(1.05);
+            }
+            
+            .envelope:active {
+                transform: scale(0.95);
+            }
+            
+            .proposal-btn:active {
+                transform: scale(0.95);
+            }
+            
+            .romantic-line:active {
+                transform: scale(0.98);
+            }
+            
+            .gallery-item:active {
+                transform: scale(0.95);
+            }
+            
+            .countdown-item:active {
+                transform: scale(0.95);
+            }
+        }
+        
+        /* Landscape mode optimizations */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+                margin-bottom: 5px;
+            }
+            
+            .love-meter {
+                padding: 15px;
+                margin: 10px auto;
+            }
+            
+            .envelope-section {
+                padding: 20px 15px;
+            }
+            
+            .envelope {
+                width: 70px;
+                height: 48px;
+            }
+            
+            .proposal-section {
+                padding: 20px 15px;
+            }
+            
+            .proposal-question {
+                font-size: 1.3rem;
+                margin-bottom: 20px;
+            }
+            
+            .gallery-section {
+                padding: 20px 15px;
+                margin: 20px 10px;
+            }
+            
+            .romantic-lines {
+                padding: 20px 15px;
+            }
+            
+            .getting-ready {
+                padding: 20px 15px;
+                margin: 20px 10px;
+            }
+            
+            .countdown-item {
+                padding: 10px;
+                min-width: 60px;
+            }
+            
+            .countdown-item .number {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* Touch Heart Button */
+        .music-player {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            z-index: 1500;
+        }
+        
+        .music-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(255, 107, 107, 0.5);
+        }
+        
+        .music-btn.playing {
+            animation: musicPulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.5); }
+            50% { box-shadow: 0 0 0 15px rgba(255, 107, 107, 0); }
+        }
+        
+        .music-icon {
+            font-size: 1.6rem;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Touch Heart Button */
+        .touch-heart-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .touch-heart-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            border: none;
+            border-radius: 50%;
+            width: 130px;
+            height: 130px;
+            cursor: pointer;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 25px rgba(238, 90, 36, 0.5);
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        .touch-heart-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 35px rgba(238, 90, 36, 0.6);
+        }
+        
+        .heart-emoji {
+            font-size: 4rem;
+            animation: pulse 1s ease-in-out infinite;
+            display: block;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        
+        .touch-heart-btn span {
+            font-size: 3.5rem;
+        }
+        
+        .touch-heart-text {
+            font-size: 0.75rem;
+            color: white;
+            margin-top: 5px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+        
+        /* Full Screen Gallery Modal */
+        .fullscreen-gallery {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            z-index: 5000;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .fullscreen-gallery.show {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .close-gallery-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            z-index: 5001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-gallery-btn:hover {
+            transform: scale(1.1);
+            background: white;
+        }
+        
+        .fullscreen-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px 40px;
+            text-align: center;
+        }
+        
+        .fullscreen-title {
+            font-size: 2.5rem;
+            color: #e91e63;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: fadeInDown 0.5s ease-out;
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fullscreen-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .fullscreen-gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .fullscreen-gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .fullscreen-gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .fullscreen-gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .fullscreen-gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .fullscreen-gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .fullscreen-gallery-item:nth-child(6) { animation-delay: 0.6s; }
+        .fullscreen-gallery-item:nth-child(7) { animation-delay: 0.7s; }
+        .fullscreen-gallery-item:nth-child(8) { animation-delay: 0.8s; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fullscreen-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .fullscreen-gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .fullscreen-gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #adb5bd;
+        }
+        
+        .fullscreen-gallery-placeholder span {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+        
+        .fullscreen-gallery-placeholder p {
+            font-size: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .touch-heart-container {
+                margin-bottom: 15px;
+            }
+            
+            .touch-heart-btn {
+                width: 110px;
+                height: 110px;
+            }
+            
+            .heart-emoji {
+                font-size: 3.5rem;
+            }
+            
+            .touch-heart-btn span {
+                font-size: 3rem;
+            }
+            
+            .touch-heart-text {
+                font-size: 0.65rem;
+            }
+            
+            .fullscreen-content {
+                padding: 50px 15px 30px;
+            }
+            
+            .fullscreen-title {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+            
+            .fullscreen-gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                max-width: 500px;
+            }
+            
+            .close-gallery-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+                top: 15px;
+                right: 15px;
+            }
+            
+            .fullscreen-gallery-placeholder span {
+                font-size: 3rem;
+            }
+            
+            .fullscreen-gallery-placeholder p {
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .touch-heart-container {
+                margin-bottom: 12px;
+            }
+            
+            .touch-heart-btn {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .heart-emoji {
+                font-size: 3rem;
+            }
+            
+            .touch-heart-btn span {
+                font-size: 2.5rem;
+            }
+            
+            .touch-heart-text {
+                font-size: 0.6rem;
+            }
+            
+            .fullscreen-content {
+                padding: 45px 10px 25px;
+            }
+            
+            .fullscreen-title {
+                font-size: 1.6rem;
+                margin-bottom: 15px;
+            }
+            
+            .fullscreen-gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                max-width: 350px;
+            }
+            
+            .close-gallery-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                top: 12px;
+                right: 12px;
+            }
+            
+            .fullscreen-gallery-placeholder span {
+                font-size: 2.5rem;
+            }
+            
+            .fullscreen-gallery-placeholder p {
+                font-size: 0.75rem;
+            }
+            
+            .fullscreen-gallery-item {
+                border-radius: 10px;
+            }
+        }
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .header h1, .envelope-section h2, .gallery-section h2, .romantic-lines h2, .getting-ready h2 {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <button class="music-btn" id="musicBtn" title="Play Background Music">
+            <span class="music-icon" id="musicIcon">🎵</span>
+        </button>
+        <audio id="backgroundAudio" loop>
+            <source src="musicc.mpeg" type="audio/mpeg">
+        </audio>
+    </div>
+    
+    <!-- Celebration Audio -->
+    <audio id="celebrationAudio">
+        <source src="musicc.mpeg" type="audio/mpeg">
+    </audio>
+
+    <!-- Celebration -->
+    <div class="celebration" id="celebration"></div>
+    <div class="hearts" id="hearts"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>💕 Happy Propose Day 💕</h1>
+            <p>"Every love story is beautiful, but ours is my favorite."</p>
+        </div>
+
+        <!-- Love Meter -->
+        <div class="love-meter">
+            <h2>💗 My Love for You 💗</h2>
+            <div class="meter-bar">
+                <div class="meter-fill" id="meterFill"></div>
+            </div>
+            <p id="meterText">Loading...</p>
+        </div>
+
+        <!-- Envelope Section -->
+        <div class="envelope-section">
+            <h2>💌 Open My Heart 💌</h2>
+            <div class="envelopes-container" id="envelopes">
+                <div class="envelope" onclick="openEnvelope(0)">
+                    <div class="envelope-counter">1</div>
+                </div>
+                <div class="envelope" onclick="openEnvelope(1)">
+                    <div class="envelope-counter">2</div>
+                </div>
+                <div class="envelope" onclick="openEnvelope(2)">
+                    <div class="envelope-counter">3</div>
+                </div>
+            </div>
+            <p style="margin-top: 30px; color: #666;">Click on each envelope to reveal my feelings...</p>
+        </div>
+
+        <!-- Proposal Section -->
+        <div class="proposal-section" id="proposalSection">
+            <h2 class="proposal-question">💕 Do You Love Me? 💕</h2>
+            <div class="proposal-buttons">
+                <button class="proposal-btn yes-btn" onclick="sayYes()">Yes 💕</button>
+                <button class="proposal-btn no-btn" id="noBtn" onclick="moveNoButton()" onmouseleave="stopNoButton()">No 😢</button>
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <div class="gallery-section" id="gallerySection" style="display: none;">
+            <div class="touch-heart-container">
+                <button class="touch-heart-btn" id="touchHeartBtn" title="Touch My Heart">
+                    <span class="heart-emoji"><img src="OIP.png" alt="image" style="width: 100px;height: 100px;"></span>
+                    <span class="touch-heart-text">Touch My Heart</span>
+                </button>
+            </div>
+            <div class="gallery-grid" id="gallery" style="display: none;">
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        📷
+                        <p>Upload your photos</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        📷
+                        <p>Upload your photos</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        📷
+                        <p>Upload your photos</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        📷
+                        <p>Upload your photos</p>
+                    </div>
+                </div>
+            </div>
+            <input type="file" id="photoUpload" accept="image/*" multiple style="display: none;" onchange="handlePhotoUpload(event)">
+        </div>
+
+        <!-- Full Screen Photo Gallery Modal -->
+        <div class="fullscreen-gallery" id="fullscreenGallery">
+            <button class="close-gallery-btn" id="closeGalleryBtn" title="Close">✕</button>
+            <div class="fullscreen-content">
+                <h2 class="fullscreen-title">💕 Our Memories 💕</h2>
+                <div class="fullscreen-gallery-grid" id="fullscreenGalleryGrid">
+                    <!-- Photos will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Romantic Lines -->
+        <div class="romantic-lines" id="romanticLines" style="display: none;">
+            <h2>💝 Words from My Heart 💝</h2>
+            <div class="lines-container">
+                <div class="romantic-line">
+                    "Every moment with you is like a beautiful dream that I never want to wake up from."
+                </div>
+                <div class="romantic-line">
+                    "You are the first thought in my morning and the last thought in my night."
+                </div>
+                <div class="romantic-line">
+                    "My heart beats faster every time I see you, even after all this time."
+                </div>
+                <div class="romantic-line">
+                    "Being with you feels like coming home after a long journey."
+                </div>
+            </div>
+        </div>
+
+        <!-- Getting Ready -->
+        <div class="getting-ready" id="gettingReady" style="display: none;">
+            <h2>⏰ Getting Ready for Our Special Day ⏰</h2>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="number" id="days">00</div>
+                    <div class="label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="hours">00</div>
+                    <div class="label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="minutes">00</div>
+                    <div class="label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="seconds">00</div>
+                    <div class="label">Seconds</div>
+                </div>
+            </div>
+            <p style="margin-top: 20px; color: #666; font-style: italic;">Counting down to our next meeting...</p>
+        </div>
+    </div>
+
+    <!-- Letter Modal -->
+    <div class="letter-modal" id="letterModal" onclick="closeLetter(event)">
+        <div class="letter-content" onclick="event.stopPropagation()">
+            <h3>💕 My Dearest 💕</h3>
+            <p id="letterText"></p>
+            <button class="close-letter" onclick="closeLetterModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Love Story Animation -->
+    <div class="love-story" id="loveStory">
+        <div class="characters">
+            <div class="boy">👦</div>
+            <div class="hug">💑</div>
+            <div class="girl">👧</div>
+        </div>
+        <div class="love-text">I Love You 💕</div>
+        <div class="celebration-final" id="finalCelebration"></div>
+    </div>
+
+    <script>
+        // Letters content
+        const letters = [
+            "My dearest love,\n\nEvery day I wake up thinking about you, and every night I fall asleep with your name on my lips. You are the light that brightens my darkest days and the smile that makes my heart skip a beat.\n\nWith all my love,\nForever yours",
+            "Beloved,\n\nThey say true love is rare, and I couldn't agree more. Finding you was like finding a treasure chest in an endless ocean. You are my priceless possession, my greatest blessing.\n\nYours always,\nYour loving partner",
+            "My soulmate,\n\nIn a world full of millions of people, my heart found you. It was the best decision it ever made. You complete me in ways I never thought possible.\n\nWith infinite love,\nYour better half"
+        ];
+
+        let openedEnvelopes = 0;
+        const totalEnvelopes = 3;
+
+        // Initial celebration
+        window.onload = function() {
+            startCelebration();
+            animateLoveMeter();
+            
+            // Try to play background music automatically
+            setTimeout(() => {
+                const backgroundAudio = document.getElementById('backgroundAudio');
+                const musicBtn = document.getElementById('musicBtn');
+                const musicIcon = document.getElementById('musicIcon');
+                
+                if (backgroundAudio) {
+                    backgroundAudio.volume = 0.4;
+                    backgroundAudio.play().then(function() {
+                        if (musicIcon) musicIcon.textContent = '🎶';
+                        if (musicBtn) musicBtn.classList.add('playing');
+                    }).catch(function(e) {
+                        console.log('Auto-play was prevented. User can click the music button to play.');
+                    });
+                }
+            }, 1000);
+        };
+
+        // Celebration animation
+        function startCelebration() {
+            const celebration = document.getElementById('celebration');
+            const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd'];
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
+                    celebration.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 50);
+            }
+            
+            // Floating hearts
+            const hearts = document.getElementById('hearts');
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+                    hearts.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 5000);
+                }, i * 200);
+            }
+        }
+
+        // Animate love meter
+        function animateLoveMeter() {
+            const meterFill = document.getElementById('meterFill');
+            const meterText = document.getElementById('meterText');
+            
+            setTimeout(() => {
+                meterFill.style.width = '100%';
+            }, 500);
+            
+            const messages = [
+                "Loading my feelings...",
+                "Measuring my love...",
+                "Calculating infinite love...",
+                "💕 100% Pure Love 💕"
+            ];
+            
+            messages.forEach((msg, index) => {
+                setTimeout(() => {
+                    meterText.textContent = msg;
+                }, index * 600);
+            });
+        }
+
+        // Open envelope
+        function openEnvelope(index) {
+            const envelope = document.querySelectorAll('.envelope')[index];
+            
+            if (envelope.classList.contains('opened')) return;
+            
+            envelope.classList.add('opened');
+            openedEnvelopes++;
+            
+            // Show letter modal
+            const modal = document.getElementById('letterModal');
+            const letterText = document.getElementById('letterText');
+            letterText.innerHTML = letters[index].replace(/\n/g, '<br>');
+            modal.style.display = 'flex';
+            
+            // Small celebration for each envelope
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '💕';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = '2s';
+                    document.getElementById('hearts').appendChild(heart);
+                    setTimeout(() => heart.remove(), 2000);
+                }, i * 50);
+            }
+            
+            // Check if all envelopes opened
+            if (openedEnvelopes === totalEnvelopes) {
+                setTimeout(() => {
+                    showProposal();
+                }, 1000);
+            }
+        }
+
+        // Close letter modal
+        function closeLetter(event) {
+            if (event.target === document.getElementById('letterModal')) {
+                closeLetterModal();
+            }
+        }
+
+        function closeLetterModal() {
+            document.getElementById('letterModal').style.display = 'none';
+        }
+
+        // Show proposal section
+        function showProposal() {
+            const proposalSection = document.getElementById('proposalSection');
+            
+            // Only show the proposal section initially
+            proposalSection.style.display = 'block';
+            
+            // Scroll to proposal
+            proposalSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Move no button - moves randomly around the screen
+        let noBtnInterval = null;
+        let noBtnMoving = false;
+        
+        function moveNoButton() {
+            if (noBtnMoving) return;
+            noBtnMoving = true;
+            
+            const noBtn = document.getElementById('noBtn');
+            
+            // Get original position
+            const originalLeft = noBtn.offsetLeft;
+            const originalTop = noBtn.offsetTop;
+            
+            // Make button fixed position
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = originalLeft + 'px';
+            noBtn.style.top = originalTop + 'px';
+            noBtn.style.transition = 'none';
+            
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+            
+            // Random movement parameters
+            let posX = originalLeft;
+            let posY = originalTop;
+            let velX = (Math.random() - 0.5) * 8;
+            let velY = (Math.random() - 0.5) * 8;
+            const speed = Math.sqrt(velX * velX + velY * velY);
+            velX = (velX / speed) * 5;
+            velY = (velY / speed) * 5;
+            
+            if (noBtnInterval) clearInterval(noBtnInterval);
+            
+            // Move around the screen
+            noBtnInterval = setInterval(() => {
+                posX += velX;
+                posY += velY;
+                
+                // Bounce off edges
+                if (posX <= 10) {
+                    posX = 10;
+                    velX = Math.abs(velX);
+                }
+                if (posX >= window.innerWidth - btnWidth - 10) {
+                    posX = window.innerWidth - btnWidth - 10;
+                    velX = -Math.abs(velX);
+                }
+                if (posY <= 10) {
+                    posY = 10;
+                    velY = Math.abs(velY);
+                }
+                if (posY >= window.innerHeight - btnHeight - 10) {
+                    posY = window.innerHeight - btnHeight - 10;
+                    velY = -Math.abs(velY);
+                }
+                
+                noBtn.style.left = posX + 'px';
+                noBtn.style.top = posY + 'px';
+            }, 16);
+        }
+        
+        // Stop moving and reset position
+        function stopNoButton() {
+            noBtnMoving = false;
+            
+            if (noBtnInterval) {
+                clearInterval(noBtnInterval);
+                noBtnInterval = null;
+            }
+            
+            const noBtn = document.getElementById('noBtn');
+            
+            // Reset to original position in the layout
+            noBtn.style.position = '';
+            noBtn.style.left = '';
+            noBtn.style.top = '';
+            noBtn.style.transform = '';
+            noBtn.style.transition = 'all 0.3s ease';
+        }
+        
+        // Reset on scroll
+        window.addEventListener('scroll', function() {
+            if (noBtnMoving) {
+                stopNoButton();
+            }
+        });
+
+        // Say Yes
+        function sayYes() {
+            console.log('sayYes() called');
+            
+            // Show all sections after proposal
+            const gallerySection = document.getElementById('gallerySection');
+            const romanticLines = document.getElementById('romanticLines');
+            const gettingReady = document.getElementById('gettingReady');
+            const loveStory = document.getElementById('loveStory');
+            
+            if (gallerySection) {
+                gallerySection.style.display = 'block';
+                console.log('gallerySection shown');
+            } else {
+                console.log('gallerySection not found');
+            }
+            
+            if (romanticLines) {
+                romanticLines.style.display = 'block';
+                console.log('romanticLines shown');
+            } else {
+                console.log('romanticLines not found');
+            }
+            
+            if (gettingReady) {
+                gettingReady.style.display = 'block';
+                console.log('gettingReady shown');
+            } else {
+                console.log('gettingReady not found');
+            }
+            
+            if (loveStory) {
+                loveStory.style.display = 'flex';
+                loveStory.classList.add('phone-disappear');
+                console.log('loveStory shown');
+            } else {
+                console.log('loveStory not found');
+            }
+            
+            // Play celebration music (pauses background, plays celebration)
+            const backgroundAudio = document.getElementById('backgroundAudio');
+            const celebrationAudio = document.getElementById('celebrationAudio');
+            
+            // Pause background music but remember position
+            if (backgroundAudio) {
+                backgroundAudio.pause();
+                // Don't reset currentTime - we'll resume from where we left off
+            }
+            
+            // Play celebration music
+            if (celebrationAudio) {
+                celebrationAudio.currentTime = 0;  // Start celebration from beginning
+                celebrationAudio.volume = 0.8;
+                celebrationAudio.play().catch(function(e) {
+                    console.log('Celebration music play failed:', e);
+                });
+            }
+            
+            // Update music button to show paused state
+            const musicIcon = document.getElementById('musicIcon');
+            const musicBtn = document.getElementById('musicBtn');
+            if (musicIcon) musicIcon.textContent = '🎵';
+            if (musicBtn) musicBtn.classList.remove('playing');
+            isMusicPlaying = false;
+            
+            const finalCelebration = document.getElementById('finalCelebration');
+            const colors = ['#ff6b6b', '#feca57', '#ff9ff3', '#54a0ff', '#e91e63'];
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'final-heart';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                    heart.style.animationDuration = (2 + Math.random() * 2) + 's';
+                    finalCelebration.appendChild(heart);
+                }, i * 30);
+            }
+            
+            // Start countdown
+            startCountdown();
+            
+            setTimeout(() => {
+                loveStory.style.opacity = '0';
+                loveStory.style.transition = 'opacity 2s ease-in';
+            }, 5000);
+            
+            setTimeout(() => {
+                loveStory.style.display = 'none';
+                alert("💕 Thank you for saying YES! 💕\n\nYou just made me the happiest person on earth!\nI promise to love you forever and always! ❤️");
+            }, 7000);
+        }
+
+        // Countdown timer
+        function startCountdown() {
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 7);
+            targetDate.setHours(0, 0, 0, 0);
+            
+            function updateCountdown() {
+                const now = new Date();
+                const diff = targetDate - now;
+                
+                if (diff <= 0) {
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    return;
+                }
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        // Handle photo upload
+        function handlePhotoUpload(event) {
+            const files = event.target.files;
+            const gallery = document.getElementById('gallery');
+            
+            gallery.innerHTML = '';
+            
+            for (let i = 0; i < Math.min(files.length, 8); i++) {
+                const file = files[i];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item';
+                    item.innerHTML = `<img src="${e.target.result}" alt="Photo ${i + 1}">`;
+                    gallery.appendChild(item);
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            if (files.length < 4) {
+                for (let i = files.length; i < 4; i++) {
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item';
+                    item.innerHTML = `<div class="gallery-placeholder"><p>More photos coming</p></div>`;
+                    gallery.appendChild(item);
+                }
+            }
+        }
+        
+        // Open fullscreen gallery
+        function openFullscreenGallery() {
+            const fullscreenGallery = document.getElementById('fullscreenGallery');
+            const fullscreenGrid = document.getElementById('fullscreenGalleryGrid');
+            const backgroundAudio = document.getElementById('backgroundAudio');
+            const celebrationAudio = document.getElementById('celebrationAudio');
+            
+            // Pause background music and play celebration music
+            if (backgroundAudio) {
+                backgroundAudio.pause();
+            }
+            if (celebrationAudio) {
+                celebrationAudio.volume = 0.6;
+                celebrationAudio.play().catch(function(e) {
+                    console.log('Gallery music play failed:', e);
+                });
+            }
+            
+            // Update music button to show paused state
+            const musicIcon = document.getElementById('musicIcon');
+            const musicBtn = document.getElementById('musicBtn');
+            if (musicIcon) musicIcon.textContent = '🎵';
+            if (musicBtn) musicBtn.classList.remove('playing');
+            isMusicPlaying = false;
+            
+            // Get photos from gallery
+            const gallery = document.getElementById('gallery');
+            const galleryItems = gallery.querySelectorAll('.gallery-item img');
+            
+            fullscreenGrid.innerHTML = '';
+            
+            if (galleryItems.length > 0) {
+                galleryItems.forEach((img, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'fullscreen-gallery-item';
+                    item.innerHTML = `<img src="${img.src}" alt="Memory ${index + 1}">`;
+                    fullscreenGrid.appendChild(item);
+                });
+            } else {
+                // Show placeholders
+                for (let i = 0; i < 4; i++) {
+                    const item = document.createElement('div');
+                    item.className = 'fullscreen-gallery-item';
+                    item.innerHTML = `
+                        <div class="fullscreen-gallery-placeholder">
+                            <span>📷</span>
+                            <p>Memory ${i + 1}</p>
+                        </div>
+                    `;
+                    fullscreenGrid.appendChild(item);
+                }
+            }
+            
+            fullscreenGallery.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Close fullscreen gallery
+        function closeFullscreenGallery() {
+            const fullscreenGallery = document.getElementById('fullscreenGallery');
+            const backgroundAudio = document.getElementById('backgroundAudio');
+            const celebrationAudio = document.getElementById('celebrationAudio');
+            
+            // Stop celebration music and resume background music
+            if (celebrationAudio) {
+                celebrationAudio.pause();
+                celebrationAudio.currentTime = 0;
+            }
+            if (backgroundAudio) {
+                backgroundAudio.play().catch(function(e) {
+                    console.log('Background music resume failed:', e);
+                });
+            }
+            
+            // Update music button to show playing state
+            const musicIcon = document.getElementById('musicIcon');
+            const musicBtn = document.getElementById('musicBtn');
+            if (musicIcon) musicIcon.textContent = '🎶';
+            if (musicBtn) musicBtn.classList.add('playing');
+            isMusicPlaying = true;
+            
+            fullscreenGallery.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Initialize touch heart button
+        document.getElementById('touchHeartBtn').addEventListener('click', openFullscreenGallery);
+        
+        // Initialize close button
+        document.getElementById('closeGalleryBtn').addEventListener('click', closeFullscreenGallery);
+        
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeFullscreenGallery();
+            }
+        });
+        
+        // Add click handlers to gallery placeholders to open fullscreen gallery
+        document.querySelectorAll('.gallery-placeholder').forEach(placeholder => {
+            placeholder.style.cursor = 'pointer';
+            placeholder.addEventListener('click', openFullscreenGallery);
+        });
+        
+        // Music Player Toggle
+        const musicBtn = document.getElementById('musicBtn');
+        const musicIcon = document.getElementById('musicIcon');
+        const backgroundAudio = document.getElementById('backgroundAudio');
+        const celebrationAudio = document.getElementById('celebrationAudio');
+        let isMusicPlaying = false;
+        let userHasInteracted = false;
+        
+        // Audio error handling
+        if (backgroundAudio) {
+            backgroundAudio.addEventListener('error', function(e) {
+                console.log('Background audio error:', e);
+                console.log('Audio src:', backgroundAudio.src);
+            });
+        }
+        if (celebrationAudio) {
+            celebrationAudio.addEventListener('error', function(e) {
+                console.log('Celebration audio error:', e);
+                console.log('Audio src:', celebrationAudio.src);
+            });
+        }
+        
+        // Try to auto-play on first user interaction
+        document.addEventListener('click', function() {
+            if (!userHasInteracted && backgroundAudio && musicIcon) {
+                userHasInteracted = true;
+                backgroundAudio.play().then(function() {
+                    musicIcon.textContent = '🎶';
+                    musicBtn.classList.add('playing');
+                    isMusicPlaying = true;
+                }).catch(function(e) {
+                    console.log('Auto-play failed:', e);
+                });
+            }
+        }, { once: true });
+        
+        if (musicBtn && backgroundAudio) {
+            musicBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (isMusicPlaying) {
+                    backgroundAudio.pause();
+                    if (musicIcon) musicIcon.textContent = '🎵';
+                    musicBtn.classList.remove('playing');
+                    isMusicPlaying = false;
+                } else {
+                    backgroundAudio.play().then(function() {
+                        if (musicIcon) musicIcon.textContent = '🎶';
+                        musicBtn.classList.add('playing');
+                        isMusicPlaying = true;
+                    }).catch(function(e) {
+                        console.log('Music playback failed:', e);
+                        alert('Please click anywhere on the page first to enable audio, then click the music button.');
+                    });
+                }
+            });
+            
+            // Update icon when music ends
+            backgroundAudio.addEventListener('ended', function() {
+                if (isMusicPlaying) {
+                    if (musicIcon) musicIcon.textContent = '🎵';
+                    musicBtn.classList.remove('playing');
+                    isMusicPlaying = false;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
